@@ -1,58 +1,243 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div>
+    <div id="top-image">
+      <img src="../assets/top-image.png" />
+    </div>
+    <div id="title-area">
+      <span class="test-title emphasis">식탐&nbsp;</span>
+      <span class="test-title">테스트</span>
+    </div>
+    <div class="sub-title-area">
+      <span class="test-sub-title">쉬우니깐 한번 해보세요.🤫</span>
+    </div>
+    <div
+      id="test-window"
+      v-bind:class="[windowColor, windowBackground, windowOpacity, size]"
+      @click="click()"
+    >
+      <div>
+        <div
+          class="result-message"
+          v-if="this.totalTime != '' && !this.canRetry"
+        >{{totalTime}}ms, {{round}}/{{totalRound}}</div>
+        <div class="click-message" v-if="!this.isStart && this.round == 0">시작하려면 클릭</div>
+        <div class="click-message" v-if="!this.isStart && this.round != 0 && !this.canRetry">다시 시작하려면 클릭</div>
+      </div>
+      <div class="test-message" v-if="this.isWait">먹을 게 나오면 재빠르게 터치!</div>
+      <div v-if="this.canRetry">
+        <div class="click-message">평균 {{mean}}ms</div>
+        <div class="click-message">오이도 음식이다.</div>
+        <a class="myButton" @click="retry()">다시 시작하기</a>
+      </div>
+    </div>
+    <div>공유하기</div>
   </div>
 </template>
 
 <script>
+// import Typer from '../components/Typer.vue';
 export default {
-  name: 'HelloWorld',
   props: {
     msg: String
+  },
+  components: {
+    // Typer
+  },
+  data() {
+    return {
+      startTime: "",
+      endTime: "",
+      totalTime: "",
+      isStart: false,
+      windowColor: "before",
+      windowBackground: "",
+      round: 0,
+      totalRound: 5,
+      isWait: false,
+      windowOpacity: "",
+      size: "",
+      windowWidth: 0,
+      results: [],
+      canRetry: false
+    };
+  },
+  methods: {
+    startTest: function() {
+      this.windowOpacity = "";
+      this.round = this.round + 1;
+      this.isStart = true;
+      this.isWait = true;
+      this.changeColor("before");
+      this.totalTime = "";
+      const vm = this;
+      const waitTime = 2000 + Math.random() * 5000;
+      setTimeout(() => vm.changeBackground(), waitTime);
+    },
+    changeColor: function(color) {
+      this.windowColor = color;
+      this.windowBackground = "";
+    },
+    changeBackground: function() {
+      this.startTime = new Date();
+      this.isWait = false;
+      this.windowBackground = "food-" + this.round;
+    },
+    click: function() {
+      if (this.isWait) {
+        alert("배고픕니까?");
+        location.reload();
+      } else {
+        if (!this.isStart) {
+          this.startTest();
+        } else {
+          this.endTest();
+        }
+      }
+    },
+    endTest: function() {
+      this.windowOpacity = "windowOpacity";
+      this.isStart = false;
+      this.endTime = new Date();
+      this.totalTime = this.endTime - this.startTime;
+      this.results.push(this.totalTime);
+      (this.startTime = ""), (this.endTime = "");
+      if (this.round == 5) {
+        this.showRetry();
+      }
+    },
+    showRetry() {
+      this.canRetry = true;
+    },
+    retry() {
+      location.reload();
+    },
+    changeSize() {
+      if (this.windowWidth > 700) {
+        this.size = "desktop";
+      } else {
+        this.size = "";
+      }
+    }
+  },
+  created() {
+    this.windowWidth = window.innerWidth;
+    window.addEventListener("resize", function() {
+      this.windowWidth = window.innerWidth;
+    });
+    // console.log(this.windowWidth)
+    this.changeSize();
+  },
+  watch: {
+    windowWidth() {
+      this.changeSize();
+    }
+  },
+  computed: {
+    mean: function() {
+      return this.results.reduce((prev, curr) => prev + curr) / this.results.length;
+    }
   }
-}
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style>
+img {
+  max-width: 60px;
+  max-height: 10%;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+/* #top-image {
+  max-width:100%;
+  max-height:100%;
+} */
+#title-area {
+  margin-top: 17px;
 }
-li {
+.test-title {
+  font-weight: bold;
+  font-size: 45px;
+}
+.test-title.emphasis {
+  color: brown;
+  font-size: 50px;
+}
+.test-sub-title {
+  font-size: 25px;
+}
+.sub-title-area {
+  margin-bottom: 10px;
+}
+.before {
+  background-color: #d7bde2;
+}
+.after {
+  background-color: steelblue;
+}
+.click-message {
+  font-size: 35px;
+  color: white;
+}
+#test-window {
+  width: 100%;
+  height: 240px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+#test-window.desktop {
+  height: 500px;
+}
+#test-window.food-1 {
+  background-image: url("../assets/delicious.jpg");
+  background-size: 100%;
+}
+#test-window.food-2 {
+  background-image: url("../assets/gopchang.jpg");
+  background-size: 100%;
+}
+#test-window.food-3 {
+  background-image: url("../assets/kimchi-fried-rice.jpg");
+  background-size: 100%;
+}
+#test-window.food-4 {
+  background-image: url("../assets/korean-food.jpg");
+  background-size: 100%;
+}
+#test-window.food-5 {
+  background-image: url("../assets/cucumber.jpg");
+  background-size: 100%;
+}
+#test-window.windowOpacity {
+  opacity: 0.6;
+}
+.test-message {
+  font-size: 25px;
+  color: white;
+}
+.result-message {
+  font-size: 25px;
+  color: white;
+}
+.myButton {
+  background-color: #44c767;
+  border-radius: 11px;
+  border: 3px solid #18ab29;
   display: inline-block;
-  margin: 0 10px;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 21px;
+  padding: 16px 37px;
+  text-decoration: none;
+  text-shadow: 0px 0px 0px #2f6627;
 }
-a {
-  color: #42b983;
+.myButton:hover {
+  background-color: #d7bde2;
+}
+.myButton:active {
+  position: relative;
+  top: 1px;
 }
 </style>
