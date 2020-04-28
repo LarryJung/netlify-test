@@ -236,16 +236,16 @@ export default {
       }
     },
     getLevel() {
-      if (this.mean > 400) {
+      if (this.mean < 400) {
         return "상당히 배가 고프다.";
       }
-      if (this.mean > 600) {
+      if (this.mean < 600) {
         return "적당히 배가 고프다.";
       }
-      if (this.mean > 800) {
+      if (this.mean < 800) {
         return "그저 든든한 상태이다.";
       }
-      if (this.mean > 1000) {
+      if (this.mean < 1000) {
         return "그닥 땡기지 않는다.";
       }
       return "나는 배가 부르다.";
