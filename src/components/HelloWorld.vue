@@ -190,24 +190,29 @@ img {
   height: 500px;
 }
 #test-window.food-1 {
-  background-image: url("../assets/delicious.jpg");
+  background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fcx4HCH%2FbtqDMGXsdbK%2FAvHfC1qomNDONaq45adDQ1%2Fimg.jpg");
   background-size: 100%;
+  background-position: center center;
 }
 #test-window.food-2 {
-  background-image: url("../assets/gopchang.jpg");
+  background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FEDnmK%2FbtqDNooDLPw%2FKkEebnFtYKqtV71UlF39Qk%2Fimg.jpg");
   background-size: 100%;
+  background-position: center 83%;
 }
 #test-window.food-3 {
-  background-image: url("../assets/kimchi-fried-rice.jpg");
+  background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2F73PTN%2FbtqDMj9cOVZ%2FnaDHTT1VKJe6KBAdMXtUEk%2Fimg.jpg");
   background-size: 100%;
+  background-position: center center;
 }
 #test-window.food-4 {
-  background-image: url("../assets/korean-food.jpg");
+  background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2F1C5BI%2FbtqDMi3t46k%2FJnUM0lOkvPMMeKbqsOdcYK%2Fimg.jpg");
   background-size: 100%;
+  background-position: center center;
 }
 #test-window.food-5 {
-  background-image: url("../assets/cucumber.jpg");
+  background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2F6OZqS%2FbtqDMktslQp%2FSsUtMaBMqHHu8hJr6ttomk%2Fimg.jpg");
   background-size: 100%;
+  background-position: center center;
 }
 #test-window.windowOpacity {
   opacity: 0.6;
