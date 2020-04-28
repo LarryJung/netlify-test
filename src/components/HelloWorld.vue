@@ -101,7 +101,12 @@
                       </g>
                     </svg>
                   </a>
-                  <a class="share__link clipboard" v-bind:data-clipboard-text="this.currentUrl" href="#" title="copy">
+                  <a
+                    class="share__link clipboard"
+                    v-bind:data-clipboard-text="this.currentUrl"
+                    href="#"
+                    title="copy"
+                  >
                     <svg
                       class="share__icon share__icon--copy"
                       xmlns="http://www.w3.org/2000/svg"
@@ -134,14 +139,14 @@
 </template>
 
 <script>
-var clipboard = new Clipboard('.clipboard');
-    clipboard.on('success', function(e) {
-      alert("주소가 복사되었습니다.")
-        console.log(e);
-    });
-    clipboard.on('error', function(e) {
-        console.log(e);
-    });
+var clipboard = new Clipboard(".clipboard");
+clipboard.on("success", function(e) {
+  alert("주소가 복사되었습니다.");
+  console.log(e);
+});
+clipboard.on("error", function(e) {
+  console.log(e);
+});
 // import Typer from '../components/Typer.vue';
 export default {
   props: {
@@ -247,8 +252,16 @@ export default {
     },
     sendKakao() {
       Kakao.Link.sendDefault({
-        objectType: "text",
-        text: `식탐 테스트 결과: ${this.getLevel()}`,
+        objectType: "feed",
+        content: {
+          title: "식탐 테스트 결과",
+          imageUrl: "",
+          link: {
+            webUrl: this.currentUrl,
+            mobileWebUrl: this.currentUrl
+          },
+          description: this.getLevel()
+        },
         buttons: [
           {
             title: "진단하러가기",
