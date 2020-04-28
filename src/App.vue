@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <HelloWorld/>
+    <div id="disqus_thread"/>
   </div>
 </template>
 
@@ -22,5 +23,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 40px;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+  margin-right: 10%;
+  margin-left: 10%
 }
 </style>
