@@ -393,7 +393,7 @@ img {
   background-position: center center;
 }
 #test-window.windowOpacity {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 .test-message {
   font-size: 25px;
