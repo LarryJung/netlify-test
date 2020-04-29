@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <HelloWorld/>
-    <div id="disqus_thread"/>
   </div>
 </template>
 
@@ -22,7 +21,7 @@ export default {
   font-family: 'Gaegu', cursive;  
   text-align: center;
   color: #2c3e50;
-  margin-top: 40px;
+  /* margin-top: 40px; */
 }
 
 #disqus_thread {

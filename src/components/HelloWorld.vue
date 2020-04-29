@@ -1,14 +1,21 @@
 <template>
   <div>
+    <ins
+      class="kakao_ad_area"
+      style="display:none;"
+      data-ad-unit="DAN-rl53d0y8juie"
+      data-ad-width="320"
+      data-ad-height="50"
+    ></ins>
     <div id="top-image">
       <img src="../assets/top-image.png" />
     </div>
     <div id="title-area">
-      <span class="test-title emphasis">식탐&nbsp;</span>
+      <span class="test-title emphasis">배고픔&nbsp;</span>
       <span class="test-title">테스트</span>
     </div>
     <div class="sub-title-area">
-      <span class="test-sub-title">쉬우니깐 한번 해보세요.🤫</span>
+      <span class="test-sub-title">🐷🤫</span>
     </div>
     <div
       id="test-window"
@@ -16,24 +23,21 @@
       @click="click()"
     >
       <div>
-        <div
-          class="result-message"
-          v-if="this.totalTime != '' && !this.canRetry"
-        >{{totalTime}}ms, {{round}}/{{totalRound}}</div>
+        <div class="result-message" v-if="this.totalTime != '' && !this.canRetry">{{totalTime}}ms</div>
         <div class="click-message" v-if="!this.isStart && this.round == 0">시작하려면 클릭</div>
         <div
           class="click-message"
           v-if="!this.isStart && this.round != 0 && !this.canRetry"
-        >다시 시작하려면 클릭</div>
+        >클릭으로 다음 시작 ({{round}}/{{totalRound}})</div>
       </div>
-      <div class="test-message" v-if="this.isWait">먹을 게 나오면 재빠르게 터치!</div>
+      <div class="test-message" v-if="this.isWait">음식사진이 나오면 터치해주세요</div>
       <div v-if="this.canRetry">
         <div>
-          <span class="click-message">평균 {{mean}}ms</span>
-          <span style="color: white;">({{getLevel()}})</span>
+          <span style="color: white; font-size:30px">당신은 '{{getLevel()}}'</span>
+          <p style="color: white; font-size:17px; margin-bottom: 6px;">평균 {{mean}}ms</p>
         </div>
-        <div class="click-message" @click="retry()">
-          오이도 음식이다.
+        <div style="color: white; font-size:25px" @click="retry()">
+          ps. 오이도 음식입니다.
           <span>
             <svg
               class="bi bi-arrow-counterclockwise retry-icon"
@@ -56,7 +60,7 @@
             </svg>
           </span>
         </div>
-        <div style="margin-top: 30px">
+        <div style="margin-top: 10px">
           <span>
             <div v-if="this.canRetry">
               <div class="share-button">
@@ -184,7 +188,7 @@ export default {
       this.changeColor("before");
       this.totalTime = "";
       const vm = this;
-      const waitTime = 2000 + Math.random() * 5000;
+      const waitTime = 2000 + Math.random() * 2000;
       setTimeout(() => vm.changeBackground(), waitTime);
     },
     changeColor: function(color) {
@@ -201,7 +205,7 @@ export default {
         return;
       }
       if (this.isWait) {
-        alert("배고픕니까?");
+        alert("배고픕니까? 일찍 누르면 처음부터 시작합니다.");
         location.reload();
       } else {
         if (!this.isStart) {
@@ -236,16 +240,16 @@ export default {
       }
     },
     getLevel() {
-      if (this.mean < 400) {
+      if (this.mean < 500) {
         return "상당히 배가 고프다.";
       }
-      if (this.mean < 600) {
+      if (this.mean < 800) {
         return "적당히 배가 고프다.";
       }
-      if (this.mean < 800) {
+      if (this.mean < 1000) {
         return "그저 든든한 상태이다.";
       }
-      if (this.mean < 1000) {
+      if (this.mean < 1400) {
         return "그닥 땡기지 않는다.";
       }
       return "나는 배가 부르다.";
@@ -305,7 +309,8 @@ export default {
       );
     }
   },
-  mounted() {}
+  mounted() {
+  }
 };
 </script>
 
