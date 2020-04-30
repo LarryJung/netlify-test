@@ -286,7 +286,7 @@ export default {
       });
     },
     sendFacebook() {
-      window.open( 'https://www.facebook.com/sharer.php?href=' + encodeURIComponent(this.currentUrl) );
+      window.open('https://www.facebook.com/sharer.php?href=' + encodeURIComponent(this.currentUrl + `&picture=https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fcxc863%2FbtqDL5pUM0O%2FXBF6wB54wOHLDndZ6XKyz1%2Fimg.png&description=${this.getLevel()}`));
     }
   },
   created() {
@@ -324,7 +324,7 @@ img {
   max-height:100%;
 } */
 #title-area {
-  margin-top: 17px;
+  /* margin-top: 5px; */
 }
 .test-title {
   font-weight: bold;
@@ -338,7 +338,7 @@ img {
   font-size: 25px;
 }
 .sub-title-area {
-  margin-bottom: 10px;
+  /* margin-bottom: 5px; */
 }
 .before {
   background-color: #d7bde2;
