@@ -21,12 +21,11 @@ export default {
   font-family: 'Gaegu', cursive;  
   text-align: center;
   color: #2c3e50;
-  /* margin-top: 40px; */
 }
 
 #disqus_thread {
   margin-top: 30px;
-  margin-right: 10%;
-  margin-left: 10%
+  margin-right: 5%;
+  margin-left: 5%
 }
 </style>

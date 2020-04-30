@@ -167,7 +167,7 @@ export default {
       isStart: false,
       windowColor: "before",
       windowBackground: "",
-      round: 0,
+      round: 4,
       totalRound: 5,
       isWait: false,
       windowOpacity: "",
@@ -241,18 +241,18 @@ export default {
     },
     getLevel() {
       if (this.mean < 500) {
-        return "상당히 배가 고프다.";
+        return "상당히 배가 고프다.😭";
       }
       if (this.mean < 800) {
-        return "적당히 배가 고프다.";
+        return "적당히 배가 고프다.🥺";
       }
       if (this.mean < 1000) {
-        return "그저 든든한 상태이다.";
+        return "그저 든든한 상태이다.🙂";
       }
       if (this.mean < 1400) {
-        return "그닥 땡기지 않는다.";
+        return "그닥 땡기지 않는다.🥕";
       }
-      return "나는 배가 부르다.";
+      return "나는 배가 부르다.🥒";
     },
     sendKakao() {
       Kakao.Link.sendDefault({
@@ -286,7 +286,7 @@ export default {
       });
     },
     sendFacebook() {
-      alert("준비중입니다.");
+      window.open( 'https://www.facebook.com/sharer.php?href=' + encodeURIComponent(this.currentUrl) );
     }
   },
   created() {
