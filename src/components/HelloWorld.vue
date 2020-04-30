@@ -167,7 +167,7 @@ export default {
       isStart: false,
       windowColor: "before",
       windowBackground: "",
-      round: 4,
+      round: 0,
       totalRound: 5,
       isWait: false,
       windowOpacity: "",
